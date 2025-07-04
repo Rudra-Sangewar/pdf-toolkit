@@ -25,3 +25,17 @@ def decrypt_pdf(input_pdf, output_pdf, password):
         print(" Input file not found.")
     except Exception as e:
         print(f" Error while decrypting PDF: {e}")
+
+def compress():
+    if selected_files:
+        compress_pdf(selected_files[0], "assets/compressed_output.pdf")
+        messagebox.showinfo("Success", "PDF compressed successfully!")
+    else:
+        messagebox.showwarning("Warning", "No file selected!")
+
+def compress():
+    if selected_files:
+        compress_pdf(selected_files[0], "assets/compressed_output.pdf")
+        messagebox.showinfo("Success", "PDF compressed successfully!")
+    else:
+        messagebox.showwarning("Warning", "No file selected!")

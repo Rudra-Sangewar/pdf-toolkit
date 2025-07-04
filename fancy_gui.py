@@ -4,6 +4,8 @@ from tkinter import filedialog, messagebox
 from utils.merge import merge_pdfs
 from utils.encrypt import encrypt_pdf
 from utils.decrypt import decrypt_pdf
+from utils.compress import compress_pdf
+
 
 
 root = ttk.Window(themename="flatly")  # Try: "darkly", "superhero", "cyborg"
@@ -39,6 +41,13 @@ def decrypt():
     else:
         messagebox.showwarning("Warning", "No file selected!")
 
+def compress():
+    if selected_files:
+        compress_pdf(selected_files[0], "assets/compressed_output.pdf")
+        messagebox.showinfo("Success", "PDF compressed successfully!")
+    else:
+        messagebox.showwarning("Warning", "No file selected!")
+
 button_style = {
     "width": 25,
     "bootstyle": "success",  
@@ -49,6 +58,7 @@ ttk.Button(root, text="📂 Browse PDF Files", command=browse_files, **button_st
 ttk.Button(root, text="➕ Merge PDFs", command=merge, **button_style).pack(pady=5)
 ttk.Button(root, text="🔒 Encrypt PDF", command=encrypt, **button_style).pack(pady=5)
 ttk.Button(root, text="🔓 Decrypt PDF", command=decrypt, **button_style).pack(pady=5)
+ttk.Button(root, text="📉 Compress PDF", command=compress, **button_style).pack(pady=5)
 
 
 root.mainloop()
