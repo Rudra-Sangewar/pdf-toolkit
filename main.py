@@ -1,6 +1,12 @@
 from utils.merge import merge_pdfs
+from utils.encrypt import encrypt_pdf
 
-pdf_files = ['assets/sample1.pdf', 'assets/sample2.pdf']
-output_file = 'assets/merged_output.pdf'
+# First, merge 2 PDFs
+pdfs = ['assets/sample1.pdf', 'assets/sample2.pdf']
+merged_file = 'assets/merged_output.pdf'
+merge_pdfs(pdfs, merged_file)
 
-merge_pdfs(pdf_files, output_file)
+# Then, encrypt the merged file
+encrypted_file = 'assets/encrypted_output.pdf'
+password = 'Rudra2004'
+encrypt_pdf(merged_file, encrypted_file, password)
