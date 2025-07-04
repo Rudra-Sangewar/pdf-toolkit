@@ -6,6 +6,8 @@ from utils.encrypt import encrypt_pdf
 from utils.decrypt import decrypt_pdf
 from utils.compress import compress_pdf
 from utils.extract import extract_pages
+from utils.watermark import apply_watermark
+
 
 
 
@@ -66,6 +68,18 @@ def extract():
                 messagebox.showerror("Error", "Invalid page input.")
     else:
         messagebox.showwarning("Warning", "No file selected!")
+def watermark():
+    if selected_files:
+        text = ttk.dialogs.inputdialog.InputDialog(
+            title="Watermark Text",
+            prompt="Enter text to add as watermark:"
+        ).show()
+
+        if text:
+            apply_watermark(selected_files[0], "assets/watermarked_output.pdf", text)
+            messagebox.showinfo("Success", "Watermark added successfully!")
+    else:
+        messagebox.showwarning("Warning", "No file selected!")
 
 button_style = {
     "width": 25,
@@ -79,6 +93,7 @@ ttk.Button(root, text="🔒 Encrypt PDF", command=encrypt, **button_style).pack(
 ttk.Button(root, text="🔓 Decrypt PDF", command=decrypt, **button_style).pack(pady=5)
 ttk.Button(root, text="📉 Compress PDF", command=compress, **button_style).pack(pady=5)
 ttk.Button(root, text="📄 Extract Pages", command=extract, **button_style).pack(pady=5)
+ttk.Button(root, text="💧 Add Watermark", command=watermark, **button_style).pack(pady=5)
 
 
 root.mainloop()
