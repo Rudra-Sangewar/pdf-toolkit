@@ -1,6 +1,6 @@
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, simpledialog
 from utils.merge import merge_pdfs
 from utils.encrypt import encrypt_pdf
 from utils.decrypt import decrypt_pdf
@@ -33,8 +33,8 @@ def merge():
 
 def encrypt():
     if selected_files:
-        encrypt_pdf(selected_files[0], "assets/encrypted_output.pdf", "1234")
-        messagebox.showinfo("Success", "Encrypted with password: 1234")
+        encrypt_pdf(selected_files[0], "assets/encrypted_output.pdf", "Rudra2004")
+        messagebox.showinfo("Success", "Encrypted with password: Rudra2004")
     else:
         messagebox.showwarning("Warning", "No file selected!")
 
@@ -54,10 +54,10 @@ def compress():
 
 def extract():
     if selected_files:
-        pages_str = ttk.dialogs.inputdialog.InputDialog(
-            title="Extract Pages",
-            prompt="Enter pages to extract (e.g., 0,2 for 1st & 3rd):"
-        ).show()
+        pages_str = simpledialog.askstring(
+            "Extract Pages",
+            "Enter pages to extract (e.g., 0,2 for 1st & 3rd):"
+        )
 
         if pages_str:
             try:
@@ -68,18 +68,20 @@ def extract():
                 messagebox.showerror("Error", "Invalid page input.")
     else:
         messagebox.showwarning("Warning", "No file selected!")
+
 def watermark():
     if selected_files:
-        text = ttk.dialogs.inputdialog.InputDialog(
-            title="Watermark Text",
-            prompt="Enter text to add as watermark:"
-        ).show()
+        text = simpledialog.askstring(
+            "Watermark Text",
+            "Enter text to add as watermark:"
+        )
 
         if text:
             apply_watermark(selected_files[0], "assets/watermarked_output.pdf", text)
             messagebox.showinfo("Success", "Watermark added successfully!")
     else:
         messagebox.showwarning("Warning", "No file selected!")
+
 
 button_style = {
     "width": 25,
